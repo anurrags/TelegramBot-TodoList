@@ -30,14 +30,15 @@ async function handleCommand(command, chatId, text) {
   } else if (command === "/list") {
     // Get the list of todo items for the chat
     const cursor = Todo.find({ chatId: chatId }).cursor();
+
     const todos = [];
+    // cursor.forEach(function (docs) {
+    //   console.log(docs.text);
+    // });
     await cursor.forEach((doc) => {
-      todos.push(doc);
+      todos.push(doc.text);
     });
-    bot.sendMessage(
-      chatId,
-      `Todo list:\n${todos.map((t) => t.text).join("\n")}`
-    );
+    bot.sendMessage(chatId, `Todo list:\n${todos.map((t) => t).join("\n")}`);
   } else if (command === "/remove") {
     // Remove a todo item
     await Todo.deleteOne({ text: text, chatId: chatId });
