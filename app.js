@@ -17,7 +17,7 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error(err));
 
-const bot = new TelegramBot("5596144059:AAHKO9v7FKWYz9DD_upVTGo39rHMOQOrD4c", {
+const bot = new TelegramBot(process.env.BOT_TOKEN, {
   polling: true,
 });
 
